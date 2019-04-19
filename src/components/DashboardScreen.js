@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import {
-    Container,
-    Content,
-    List
-} from 'native-base';
 import { newsApiFetch } from '../actions/newsActions';
 import NewsListItem from './NewsListItem';
 
@@ -16,14 +11,11 @@ class DashboardScreen extends Component {
     };
 
     componentDidUpdate = (nextProps, nextState) => {
-        console.log('componentDidUpdate');
-        console.log(this.props.newsArticles);
+        //console.log('componentDidUpdate');
+        //console.log(this.props.newsArticles);
     };
 
     callApi() {
-        console.log('callApi');
-        console.log(this.props.pageNo);
-
         this.props.newsApiFetch({ pageNo: this.props.pageNo, count: 30 });
     }
 
@@ -31,24 +23,15 @@ class DashboardScreen extends Component {
 
     render() {
         return (
-            <Container>
-                <Content>
-
-                    <List>
-                        <FlatList
-                            data={this.props.newsArticles}
-                            onEndReached={() => { this.callApi() }}
-                            keyExtractor={this._keyExtractor}
-                            onEndReachedThreshold={0.4}
-                            renderItem={({ item }) => (
-                                <NewsListItem item={item} />
-                            )}
-                        />
-                    </List>
-
-
-                </Content>
-            </Container>
+            <FlatList
+                data={this.props.newsArticles}
+                onEndReached={() => { this.callApi() }}
+                keyExtractor={this._keyExtractor}
+                onEndReachedThreshold={0.4}
+                renderItem={({ item }) => (
+                    <NewsListItem item={item} />
+                )}
+            />
         );
     }
 }
@@ -61,8 +44,6 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    console.log('mapStateToProps');
-    console.log(state.news.articles);
     return {
         newsArticles: state.news.articles,
         pageNo: state.news.pageNo

@@ -45,7 +45,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('hello1');
     return (
       <Provider store={store}>
         {/* <AuthenticationScreen /> */}

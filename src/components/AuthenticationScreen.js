@@ -34,7 +34,7 @@ class AuthenticationScreen extends Component {
 
   onSignInButtonPress() {
     const { email, password } = this.props;
-    console.log(email);
+    // console.log(email);
     this.props.loginUser({ email, password });
   }
 

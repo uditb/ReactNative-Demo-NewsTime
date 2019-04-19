@@ -7,14 +7,13 @@ import axios from 'axios';
 
 
 export const newsApiFetch = ({ pageNo, count }) => {
-    console.log('newsApiFetch ' + pageNo);
+    console.log('newsApiFetch pageNo' + pageNo);
     return (dispatch) => {
         dispatch({ type: NEWS_API_FETCH });
 
-        axios.get('https://newsapi.org/v2/everything?apiKey=cf3bf6bf881d4fe0bc5d8865515fb14f&sources=new-scientist&pageSize='+count+'&page=' + pageNo)
+        axios.get('https://newsapi.org/v2/everything?apiKey=cf3bf6bf881d4fe0bc5d8865515fb14f&sources=new-scientist&pageSize=' + count + '&page=' + pageNo)
             .then(response => {
-                //console.log(response);
-                console.log(response.data.articles);
+                //console.log(response.data.articles);
                 newsApiFetchSuccess(dispatch, response.data.articles);
             })
     };

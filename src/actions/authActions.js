@@ -9,7 +9,7 @@ import {
 } from './types';
 
 export const emailChanged = (text) => {
-    console.log('emailChanged '+text);
+    //console.log('emailChanged '+text);
     return {
         type: EMAIL_CHANGED,
         payload: text
@@ -17,7 +17,7 @@ export const emailChanged = (text) => {
 };
 
 export const passwordChanged = (text) => {
-    console.log('passwordChanged '+text);
+    //console.log('passwordChanged '+text);
     return {
         type: PASSWORD_CHANGED,
         payload: text
@@ -25,14 +25,14 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = ({ email, password }) => {
-    console.log('loginUser '+email);
+    console.log('loginUser ' + email);
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
 
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(user => loginUserSuccess(dispatch, user))
             .catch((error) => {
-                console.log('error: '+error);
+                console.log('error: ' + error);
                 firebase.auth().createUserWithEmailAndPassword(email, password)
                     .then(user => loginUserSuccess(dispatch, user))
                     .catch(() => loginUserFail(dispatch));
@@ -47,7 +47,7 @@ const loginUserFail = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
-    console.log('loginUserSuccess: '+user.email);
+    console.log('loginUserSuccess: ' + user.email);
 
     dispatch({
         type: LOGIN_USER_SUCCESS,
