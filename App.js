@@ -5,6 +5,7 @@ import AuthenticationScreen from './src/components/AuthenticationScreen'
 import firebase from 'firebase';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import DashboardScreen from './src/components/DashboardScreen';
+import NewsDetailsScreen from './src/components/NewsDetailsScreen';
 
 const store = configureStore()
 
@@ -22,6 +23,12 @@ const AppNavigator = createStackNavigator({
       headerLeft: null
     })
   },
+  NewsDetails: {
+    screen: NewsDetailsScreen,
+    navigationOptions: () => ({
+      title: 'News'
+    })
+  }
 },
   {
     initialRouteName: 'Dashboard'
