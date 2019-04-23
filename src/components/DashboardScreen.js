@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, ActivityIndicator, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { newsApiFetch } from '../actions/newsActions';
 import NewsListItem from './NewsListItem';
@@ -10,16 +10,25 @@ class DashboardScreen extends Component {
         this.props.newsApiFetch({ pageNo: 1, count: 30 });
     };
 
-    componentDidUpdate = (nextProps, nextState) => {
-        //console.log('componentDidUpdate');
-        //console.log(this.props.newsArticles);
-    };
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+        return true;
+    }
+  
 
     callApi() {
         this.props.newsApiFetch({ pageNo: this.props.pageNo, count: 30 });
     }
 
     onPress = (item) => {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
         this.props.navigation.navigate('NewsDetails', { item });
     };
 
