@@ -31,7 +31,7 @@ const AppNavigator = createStackNavigator({
   }
 },
   {
-    initialRouteName: 'Dashboard'
+    initialRouteName: 'Authentication'
   }
 );
 
