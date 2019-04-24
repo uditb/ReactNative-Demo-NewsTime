@@ -3,19 +3,13 @@ import { Provider } from 'react-redux';
 import configureStore from './src/store/store';
 import AuthenticationScreen from './src/components/AuthenticationScreen'
 import firebase from 'firebase';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer , createSwitchNavigator} from 'react-navigation';
 import DashboardScreen from './src/components/DashboardScreen';
 import NewsDetailsScreen from './src/components/NewsDetailsScreen';
 
 const store = configureStore()
 
-const AppNavigator = createStackNavigator({
-  Authentication: {
-    screen: AuthenticationScreen,
-    navigationOptions: () => ({
-      title: 'Login'
-    })
-  },
+export const DashboardNavigator = createStackNavigator({
   Dashboard: {
     screen: DashboardScreen,
     navigationOptions: () => ({
@@ -31,11 +25,34 @@ const AppNavigator = createStackNavigator({
   }
 },
   {
+    initialRouteName: 'Dashboard'
+  }
+);
+
+export const AuthNavigator = createStackNavigator({
+  Authentication: {
+    screen: AuthenticationScreen,
+    navigationOptions: () => ({
+      title: 'Login'
+    })
+  }
+},
+  {
     initialRouteName: 'Authentication'
   }
 );
 
-const AppContainer = createAppContainer(AppNavigator);
+const ParentContainer = createAppContainer(createSwitchNavigator(
+  {
+    Auth: AuthNavigator,
+    Dashboard: DashboardNavigator,
+  },
+  {
+    initialRouteName: 'Auth'
+  }
+));
+
+
 
 
 export default class App extends Component {
@@ -54,8 +71,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        {/* <AuthenticationScreen /> */}
-        <AppContainer />
+        <ParentContainer />
       </Provider>
     )
   };
