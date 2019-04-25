@@ -3,13 +3,28 @@ import { Provider } from 'react-redux';
 import configureStore from './src/store/store';
 import AuthenticationScreen from './src/components/AuthenticationScreen'
 import firebase from 'firebase';
-import { createStackNavigator, createAppContainer , createSwitchNavigator} from 'react-navigation';
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import DashboardScreen from './src/components/DashboardScreen';
 import NewsDetailsScreen from './src/components/NewsDetailsScreen';
+import { isLoggedIn } from './src/common/constant';
+import { getData } from './src/common/utils';
 
 const store = configureStore()
 
-export const DashboardNavigator = createStackNavigator({
+export const AuthStack = createStackNavigator({
+  Authentication: {
+    screen: AuthenticationScreen,
+    navigationOptions: () => ({
+      title: 'Login'
+    })
+  }
+},
+  {
+    initialRouteName: 'Authentication'
+  }
+);
+
+export const AppStack = createStackNavigator({
   Dashboard: {
     screen: DashboardScreen,
     navigationOptions: () => ({
@@ -29,23 +44,10 @@ export const DashboardNavigator = createStackNavigator({
   }
 );
 
-export const AuthNavigator = createStackNavigator({
-  Authentication: {
-    screen: AuthenticationScreen,
-    navigationOptions: () => ({
-      title: 'Login'
-    })
-  }
-},
-  {
-    initialRouteName: 'Authentication'
-  }
-);
-
 const ParentContainer = createAppContainer(createSwitchNavigator(
   {
-    Auth: AuthNavigator,
-    Dashboard: DashboardNavigator,
+    Auth: AuthStack,
+    App: AppStack,
   },
   {
     initialRouteName: 'Auth'
@@ -53,9 +55,36 @@ const ParentContainer = createAppContainer(createSwitchNavigator(
 ));
 
 
-
-
 export default class App extends Component {
+
+  performTimeConsumingTask = async () => {
+    return new Promise((resolve) =>
+        setTimeout(
+            () => { resolve('result') },
+            1000
+        )
+    );
+};
+
+async componentDidMount() {
+    console.log("Tabs => componentDidMount()");
+    const data = await this.performTimeConsumingTask();
+
+    if (data !== null) {
+      const userToken = await getData(isLoggedIn);
+      alert(this.props.navigation);
+      this.props.navigation.navigate((userToken === '1') ? 'App' : 'Auth');
+    }
+
+}
+
+  // Fetch the token from storage then navigate to our appropriate place
+  // _bootstrapAsync = async () => {
+  //   const userToken = await getData(isLoggedIn);
+  //   alert(this.props.navigation);
+  //   this.props.navigation.navigate((userToken === '1') ? 'App' : 'Auth');
+  // };
+
   componentWillMount() {
     var config = {
       apiKey: "AIzaSyCZNO-Y3UkrEr_ZXrq6QfNo7FpJq-ftYGE",
@@ -68,15 +97,17 @@ export default class App extends Component {
     firebase.initializeApp(config);
   }
 
+  // componentDidMount = () => {
+  //   this._bootstrapAsync();
+  // };
+
   render() {
     return (
       <Provider store={store}>
-        <ParentContainer />
+          <ParentContainer />
       </Provider>
     )
   };
-
-
 };
 
 

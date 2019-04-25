@@ -14,15 +14,17 @@ import {
 } from 'native-base';
 import { Logo } from '../assets/images';
 import { emailChanged, passwordChanged, loginUser } from '../actions/authActions';
+import { storeData, getData } from '../common/utils';
+import { isLoggedIn } from '../common/constant';
 
 class AuthenticationScreen extends Component {
 
   componentDidUpdate() {
     if (this.props.isLoggedIn) {
+      storeData(isLoggedIn, '1');
       this.props.navigation.navigate('Dashboard');
     }
   }
-
 
   onEmailChange(text) {
     this.props.emailChanged(text)
