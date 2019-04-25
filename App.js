@@ -7,7 +7,7 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator } from 
 import AuthenticationScreen from './src/components/AuthenticationScreen'
 import DashboardScreen from './src/components/DashboardScreen';
 import NewsDetailsScreen from './src/components/NewsDetailsScreen';
-import SplashScreen from './src/components/SplashScreen';
+import AppSplashScreen from './src/components/AppSplashScreen';
 
 const store = configureStore()
 
@@ -46,7 +46,7 @@ export const AppStack = createStackNavigator({
 
 const ParentContainer = createAppContainer(createSwitchNavigator(
   {
-    Splash: SplashScreen,
+    Splash: AppSplashScreen,
     Auth: AuthStack,
     App: AppStack,
   },

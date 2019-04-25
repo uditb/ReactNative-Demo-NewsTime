@@ -1,11 +1,10 @@
-
 import { getData } from '../common/utils';
 import { View, ActivityIndicator } from 'react-native';
 import React, { Component } from 'react';
 import { isLoggedIn } from '../common/constant';
 
 
-export default class SplashScreen extends Component {
+export default class AppSplashScreen extends Component {
   constructor() {
     super();
     this.navigateBasedOnLoginStatus();
