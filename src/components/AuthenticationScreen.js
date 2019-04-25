@@ -19,6 +19,7 @@ import { isLoggedIn } from '../common/constant';
 
 class AuthenticationScreen extends Component {
 
+  //View lifecycle
   componentDidUpdate() {
     if (this.props.isLoggedIn) {
       storeData(isLoggedIn, '1');
@@ -26,6 +27,7 @@ class AuthenticationScreen extends Component {
     }
   }
 
+  //actions
   onEmailChange(text) {
     this.props.emailChanged(text)
   };
@@ -36,12 +38,18 @@ class AuthenticationScreen extends Component {
 
   onSignInButtonPress() {
     const { email, password } = this.props;
-    // console.log(email);
     this.props.loginUser({ email, password });
   }
 
+  //render functions
   renderError() {
-
+    if (this.props.error) {
+      return (
+        <View>
+          <Text style={styles.ErrorTextStyle}>{this.props.error}</Text>
+        </View>
+      );
+    }
   }
 
   renderButton() {
@@ -100,6 +108,7 @@ class AuthenticationScreen extends Component {
                   </Item>
                 </Form>
                 {this.renderButton()}
+                {this.renderError()}
               </Card>
 
             </View>
@@ -160,6 +169,11 @@ const styles = {
   signUpButtonStyle: {
     alignSelf: 'center',
     paddingBottom: 20
+  },
+  ErrorTextStyle: {
+    alignSelf: 'center',
+    padding: 5,
+    color: 'red'
   }
 };
 

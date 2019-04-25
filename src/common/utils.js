@@ -11,8 +11,6 @@ export const storeData = async (key, value) => {
     }
 }
 
-
-
 export const getData = async (key) => {
     let value = '';
     try {

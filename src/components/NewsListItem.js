@@ -17,7 +17,7 @@ class NewsListItem extends Component {
         Moment.locale('en');
 
         return (
-            <TouchableOpacity onPress={ this.onPress }>
+            <TouchableOpacity onPress={this.onPress}>
                 <Card>
 
                     <CardItem cardBody>

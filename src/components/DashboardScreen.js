@@ -21,16 +21,15 @@ class DashboardScreen extends Component {
     handleBackButton() {
         return true;
     }
-  
-
-    callApi() {
-        this.props.newsApiFetch({ pageNo: this.props.pageNo, count: 30 });
-    }
 
     onPress = (item) => {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
         this.props.navigation.navigate('NewsDetails', { item });
     };
+
+    callApi() {
+        this.props.newsApiFetch({ pageNo: this.props.pageNo, count: 30 });
+    }
 
     _keyExtractor = (item, index) => index.toString();
 
@@ -57,7 +56,6 @@ class DashboardScreen extends Component {
                             item={item}
                             onPressItem={this.onPress}
                         />
-
                     )}
                 />
             </View>

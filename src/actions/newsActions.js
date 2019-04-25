@@ -18,7 +18,7 @@ export const newsApiFetch = ({ pageNo, count }) => {
             })
             .catch((error) => {
                 console.log('error: ' + error);
-               newApiFetchFail(dispatch);
+                newApiFetchFail(dispatch);
             });
     };
 };

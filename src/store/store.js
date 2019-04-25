@@ -6,8 +6,8 @@ import ReduxThunk from 'redux-thunk';
 import newsReducer from '../reducers/newsReducer';
 
 const rootReducer = combineReducers({
-  auth : authReducer,
-  news : newsReducer
+  auth: authReducer,
+  news: newsReducer
 });
 
 const configureStore = () => {
