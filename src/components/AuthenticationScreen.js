@@ -16,13 +16,9 @@ import { Logo } from '../assets/images';
 import { emailChanged, passwordChanged, loginUser } from '../actions/authActions';
 import { storeData, getData } from '../common/utils';
 import { isLoggedIn } from '../common/constant';
-import SpalshScreen from 'react-native-splash-screen'
 
 class AuthenticationScreen extends Component {
 
-  componentDidMount(){
-    SpalshScreen.hide();
-  }
   //View lifecycle
   componentDidUpdate() {
     if (this.props.isLoggedIn) {

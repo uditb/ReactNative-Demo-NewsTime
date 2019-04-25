@@ -3,7 +3,6 @@ import { FlatList, View, Text, ActivityIndicator, BackHandler } from 'react-nati
 import { connect } from 'react-redux';
 import { newsApiFetch } from '../actions/newsActions';
 import NewsListItem from './NewsListItem'; 
-import SplashScreen from 'react-native-splash-screen';
 
 class DashboardScreen extends Component {
 
@@ -13,7 +12,6 @@ class DashboardScreen extends Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-        SplashScreen.hide();
     }
 
     componentWillUnmount() {
