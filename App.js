@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Provider } from 'react-redux';
 import configureStore from './src/store/store';
 import AuthenticationScreen from './src/components/AuthenticationScreen'
@@ -6,8 +7,8 @@ import firebase from 'firebase';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import DashboardScreen from './src/components/DashboardScreen';
 import NewsDetailsScreen from './src/components/NewsDetailsScreen';
-import { isLoggedIn } from './src/common/constant';
-import { getData } from './src/common/utils';
+import SplashScreen from './src/components/SplashScreen';
+
 
 const store = configureStore()
 
@@ -44,37 +45,28 @@ export const AppStack = createStackNavigator({
   }
 );
 
+
+
 const ParentContainer = createAppContainer(createSwitchNavigator(
   {
+    Splash: SplashScreen,
     Auth: AuthStack,
     App: AppStack,
   },
   {
-    initialRouteName: 'Auth'
+    initialRouteName: 'Splash'
   }
 ));
 
 
 export default class App extends Component {
 
-  performTimeConsumingTask = async () => {
-    return new Promise((resolve) =>
-        setTimeout(
-            () => { resolve('result') },
-            1000
-        )
-    );
-};
+
 
 async componentDidMount() {
     console.log("Tabs => componentDidMount()");
-    const data = await this.performTimeConsumingTask();
 
-    if (data !== null) {
-      const userToken = await getData(isLoggedIn);
-      alert(this.props.navigation);
-      this.props.navigation.navigate((userToken === '1') ? 'App' : 'Auth');
-    }
+     
 
 }
 
