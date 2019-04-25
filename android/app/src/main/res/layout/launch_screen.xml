@@ -7,6 +7,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/splash_background" />
+        android:padding="10dp"
+         android:src="@drawable/ic_logo" />
 </RelativeLayout>
