@@ -4,6 +4,10 @@
 
 The project will demonstarate a simple React native application build using redux. 
 
+![alt text](https://github.com/uditb/ReactNative-Demo-NewsTime/blob/master/ScreenShots/Screenshot%202019-04-17%20at%207.02.16%20PM.png)
+
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
